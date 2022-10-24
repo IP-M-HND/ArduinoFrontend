@@ -1,0 +1,85 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Parametros Dispositivos</mat-card-title>
+    <mat-card-subtitle> </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Descripcion</mat-label>
+        <input
+          [(ngModel)]="descripcion"
+          matInput
+          placeholder="Descripcion"
+        /> </mat-form-field
+      ><br />
+      <mat-form-field appearance="outline">
+        <mat-label>Valor</mat-label>
+        <input
+          [(ngModel)]="valor"
+          matInput
+          placeholder="Valor"
+        /> </mat-form-field
+      ><br />
+      <mat-form-field>
+        <mat-label>Dispositivo</mat-label>
+        <mat-select [(ngModel)]="idDispositivo">
+          <mat-option
+            *ngFor="let dispositivo of dispositivos"
+            [value]="dispositivo.idDispositivo"
+          >
+            {{ dispositivo.descripciondispositivos }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="saveParametro()">
+      Guardar
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<br />
+<h4>Lista Parametros</h4>
+<hr />
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+  <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+  <!-- Position Column -->
+  <ng-container matColumnDef="idParametro">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+    <td mat-cell *matCellDef="let element">{{ element.idParametro }}</td>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="descripcion">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.descripcion }}
+    </td>
+  </ng-container>
+  <!-- Weight Column -->
+  <ng-container matColumnDef="descripciondispositivos">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Dispositivo</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.descripciondispositivos }}
+    </td>
+  </ng-container>
+  <!-- Weight Column -->
+  <ng-container matColumnDef="valor">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor</th>
+    <td mat-cell *matCellDef="let element">{{ element.valor }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="accion">
+    <th mat-header-cell *matHeaderCellDef> Action </th>   
+    <td mat-cell *matCellDef="let element"> 
+      <button mat-raised-button (click)="editParametro(element)">Editar</button> 
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

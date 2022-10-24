@@ -1,0 +1,4 @@
+<div class="row">
+    <mat-spinner *ngIf="cargando"></mat-spinner>
+    <app-dispositivo class="example-card col-md-4 mx-auto my-5" *ngFor="let item of listaDispositivos" [dispositivo]="item"></app-dispositivo>
+</div>
